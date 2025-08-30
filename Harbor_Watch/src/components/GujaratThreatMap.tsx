@@ -123,14 +123,14 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
   /> */}
 
   {/* Arabian Sea label */}
-  <text x="300" y="120" textAnchor="middle" className="fill-primary text-sm font-medium opacity-60">
+  {/* <text x="300" y="120" textAnchor="middle" className="fill-primary text-sm font-medium opacity-60">
     Arabian Sea
-  </text>
+  </text> */}
 
   {/* State boundary indication */}
-  <text x="450" y="300" textAnchor="middle" className="fill-primary text-xs opacity-40">
+  {/* <text x="450" y="300" textAnchor="middle" className="fill-primary text-xs opacity-40">
     Gujarat State
-  </text>
+  </text> */}
 </svg>
 
       {/* Location Labels */}
