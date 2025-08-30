@@ -42,7 +42,7 @@ const ThreatMap = ({ threats }: ThreatMapProps) => {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: 'D:\\Hackout_RunTime_Terrors\\Harbor_Watch\\public\\Guj_map.png', // Replace with the actual path to your image
+            backgroundImage: 'url(/Guj_map.png)', // Replace with the actual path to your image
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: 'blue', // Fallback color in case the image doesn't load
