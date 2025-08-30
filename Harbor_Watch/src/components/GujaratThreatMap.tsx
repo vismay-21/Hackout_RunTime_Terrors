@@ -101,12 +101,12 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
 <svg className="absolute inset-0 w-full h-full">
   <defs>
     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="black" strokeWidth="1" opacity="0.2" />
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.5" opacity="0.3" />
     </pattern>
   </defs>
   <rect width="100%" height="100%" fill="url(#grid)" />
-</svg>
 
+</svg>
   {/* Gujarat Coastline */}
   {/* <path
     d="M 80 200 Q 120 180 180 190 Q 240 185 300 195 Q 360 200 420 185 Q 480 175 540 180"
@@ -132,7 +132,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
   {/* <text x="450" y="300" textAnchor="middle" className="fill-primary text-xs opacity-40">
     Gujarat State
   </text> */}
-</svg>
+
 
       {/* Location Labels */}
       {/* <div className="absolute top-4 left-4 text-sm font-medium text-primary">
