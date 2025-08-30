@@ -295,21 +295,21 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
       })}
 
       {/* Legend */}
-      <div className="absolute top-4 left-4 bg-card/90 backdrop-blur-sm rounded-lg p-2 border shadow-lg">
-        <h4 className="text-xs font-semibold mb-1">Alert Levels</h4>
-        <div className="space-y-1">
+      <div className="absolute top-4 left-4 bg-card/90 backdrop-blur-sm rounded-md p-1 border shadow-md">
+        <h4 className="text-[10px] font-semibold mb-1">Alert Levels</h4>
+        <div className="space-y-0.5">
           {[
             { level: 'safe', label: 'Safe', icon: <MapPin className="h-2 w-2" /> },
             { level: 'watch', label: 'Watch', icon: <Eye className="h-2 w-2" /> },
             { level: 'warning', label: 'Warning', icon: <AlertTriangle className="h-2 w-2" /> },
             { level: 'critical', label: 'Critical', icon: <Zap className="h-2 w-2" /> }
           ].map(({ level, label, icon }) => (
-            <div key={level} className="flex items-center space-x-2 text-xs">
+            <div key={level} className="flex items-center space-x-1 text-[10px]">
               <div
-                className="w-2.5 h-2.5 rounded-full border border-background flex items-center justify-center"
+                className="w-2 h-2 rounded-full border border-background flex items-center justify-center"
                 style={{ backgroundColor: getThreatColor(level) }}
               >
-                <div className="text-white" style={{ fontSize: '8px' }}>
+                <div className="text-white" style={{ fontSize: '6px' }}>
                   {icon}
                 </div>
               </div>
@@ -317,7 +317,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
             </div>
           ))}
         </div>
-        <div className="text-xs text-muted-foreground mt-1 pt-1 border-t">
+        <div className="text-[9px] text-muted-foreground mt-0.5 pt-0.5 border-t">
           Click locations for detailed metrics
         </div>
       </div>
