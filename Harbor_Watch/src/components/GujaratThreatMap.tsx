@@ -327,7 +327,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
       <div className="absolute bottom-4 right-4 bg-card/90 backdrop-blur-sm rounded-lg p-2 border shadow-lg">
         <div className="text-xs text-muted-foreground mb-1">Scale</div>
         <div className="flex items-center space-x-1">
-          <div className="w-8 h-0.5 bg-primary"></div>
+          <div className="w-8 h-0.5 bg-black"></div>
           <span className="text-xs">35 km</span>
         </div>
       </div>
