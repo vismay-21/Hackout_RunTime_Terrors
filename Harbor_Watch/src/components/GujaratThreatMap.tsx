@@ -24,13 +24,13 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
 
   // Gujarat coastal locations → manually tuned pixel positions (x,y)
   const gujaratLocations = [
-    { name: 'Varvala', coordinates: [160, 310], type: 'coastal_town' },
-    { name: 'Shivrajpur', coordinates: [220, 120], type: 'coastal_town' },
-    { name: 'Dwarka', coordinates: [200, 180], type: 'coastal_town' },
-    { name: 'Okha', coordinates: [240, 80], type: 'cityport' },
-    { name: 'Beyt Dwarka', coordinates: [260, 100], type: 'fishing_harbor' },
-    { name: 'Positra', coordinates: [450, 70], type: 'coastal_town' },
-    { name: 'Surajkaradi', coordinates: [300, 250], type: 'fishing_harbor' },
+    { name: 'Varvala', coordinates: [110, 360], type: 'coastal_town' },
+    { name: 'Shivrajpur', coordinates: [215, 150], type: 'coastal_town' },
+    { name: 'Dwarka', coordinates: [205, 200], type: 'coastal_town' },
+    { name: 'Okha', coordinates: [250, 95], type: 'cityport' },
+    { name: 'Beyt Dwarka', coordinates: [270, 125], type: 'fishing_harbor' },
+    { name: 'Positra', coordinates: [480, 115], type: 'coastal_town' },
+    { name: 'Surajkaradi', coordinates: [320, 280], type: 'fishing_harbor' },
   ];
 
   const getThreatColor = (level: string) => {
