@@ -23,16 +23,17 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
   const [selectedThreat, setSelectedThreat] = useState<string | null>(null);
 
   // Gujarat coastal locations with their coordinates
-  const gujaratLocations = [
-    { name: 'Varvala', coordinates: [69.2, 21.5], type: 'coastal_town' },
-    { name: 'Shivrajpur', coordinates: [69.6, 21.7], type: 'coastal_town' },
-    { name: 'Dwarka', coordinates: [69.0, 21.2], type: 'coastal_town' },
-    { name: 'Okha', coordinates: [69.1, 22.4], type: 'cityport' },
-    { name: 'Beyt Dwarka', coordinates: [69.2, 22.3], type: 'fishing_harbor' },
-    { name: 'Positra', coordinates: [71.2, 22.0], type: 'coastal_town' },
-    { name: 'Surajkaradi', coordinates: [70.1, 21.1], type: 'fishing_harbor' },
-    //{ name: 'Chorwad', coordinates: [70.2167, 21.0333], type: 'fishing_harbor' }
-  ];
+  const gujaratLocationsAdjusted = [
+  { name: 'Varvala',      coordinates: [69.6, 21.9], type: 'coastal_town' },
+  { name: 'Shivrajpur',   coordinates: [70.0, 22.1], type: 'coastal_town' },
+  { name: 'Dwarka',       coordinates: [69.4, 21.6], type: 'coastal_town' },
+  { name: 'Okha',         coordinates: [69.5, 22.8], type: 'cityport' },
+  { name: 'Beyt Dwarka',  coordinates: [69.6, 22.7], type: 'fishing_harbor' },
+  { name: 'Positra',      coordinates: [71.2, 22.0], type: 'coastal_town' }, // anchor used for offset
+  { name: 'Surajkaradi',  coordinates: [70.5, 21.5], type: 'fishing_harbor' },
+  // { name: 'Chorwad', coordinates: [70.6167, 21.4333], type: 'fishing_harbor' } // if needed, +0.4,+0.4
+];
+
 
   const getThreatColor = (level: string) => {
     switch (level) {
