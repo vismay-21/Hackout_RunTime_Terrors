@@ -37,7 +37,20 @@ const ThreatMap = ({ threats }: ThreatMapProps) => {
   return (
     <div className="relative w-full h-[500px] bg-muted rounded-lg overflow-hidden">
       {/* Map Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5">
+      <div className="absolute inset-0">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'D:\\Hackout_RunTime_Terrors\\Harbor_Watch\\public\\Guj_map.png', // Replace with the actual path to your image
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundColor: 'blue', // Fallback color in case the image doesn't load
+          }}
+        />
+
+
+        {/* Grid Overlay */}
         <div className="absolute inset-0 opacity-20">
           <svg width="100%" height="100%" className="text-primary/30">
             <defs>
