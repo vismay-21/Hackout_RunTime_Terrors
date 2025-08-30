@@ -45,7 +45,7 @@ const ThreatMap = ({ threats }: ThreatMapProps) => {
             backgroundImage: 'url(/map.png)', // Replace with the actual path to your image
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            //backgroundColor: 'blue', // Fallback color in case the image doesn't load
+            backgroundColor: 'blue', // Fallback color in case the image doesn't load
           }}
         />
 
