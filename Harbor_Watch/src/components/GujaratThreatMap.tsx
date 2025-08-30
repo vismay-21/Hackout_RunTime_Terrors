@@ -24,13 +24,13 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
 
   // Gujarat coastal locations with their coordinates
   const gujaratLocations = [
-    { name: 'Varvala', coordinates: [70.3667, 20.9], type: 'coastal_town' },
-    { name: 'Shivrajpur', coordinates: [69.6293, 21.6417], type: 'coastal_town' },
-    { name: 'Dwarka', coordinates: [68.9685, 22.2394], type: 'coastal_town' },
-    { name: 'Okha', coordinates: [70.0671, 22.4707], type: 'cityport' },
-    { name: 'Beyt Dwarka', coordinates: [72.1519, 21.7645], type: 'fishing_harbor' },
-    { name: 'Positra', coordinates: [70.9127, 20.7144], type: 'coastal_town' },
-    { name: 'Surajkaradi', coordinates: [70.1194, 21.1167], type: 'fishing_harbor' },
+    { name: 'Varvala', coordinates: [70.2, 21.0], type: 'coastal_town' },
+    { name: 'Shivrajpur', coordinates: [69.6, 21.7], type: 'coastal_town' },
+    { name: 'Dwarka', coordinates: [69.0, 22.2], type: 'coastal_town' },
+    { name: 'Okha', coordinates: [69.1, 22.4], type: 'cityport' },
+    { name: 'Beyt Dwarka', coordinates: [69.2, 22.3], type: 'fishing_harbor' },
+    { name: 'Positra', coordinates: [70.8, 21.6], type: 'coastal_town' },
+    { name: 'Surajkaradi', coordinates: [70.1, 21.1], type: 'fishing_harbor' },
     //{ name: 'Chorwad', coordinates: [70.2167, 21.0333], type: 'fishing_harbor' }
   ];
 
