@@ -22,15 +22,15 @@ interface GujaratThreatMapProps {
 const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) => {
   const [selectedThreat, setSelectedThreat] = useState<string | null>(null);
 
-  // Gujarat coastal locations (shifted slightly into water near the cities)
+  // Gujarat coastal locations → manually tuned pixel positions (x,y)
   const gujaratLocations = [
-    { name: 'Varvala', coordinates: [69.15, 20.85], type: 'coastal_town' },
-    { name: 'Shivrajpur', coordinates: [69.05, 21.72], type: 'coastal_town' },
-    { name: 'Dwarka', coordinates: [68.95, 21.15], type: 'coastal_town' },
-    { name: 'Okha', coordinates: [69.05, 22.45], type: 'cityport' },
-    { name: 'Beyt Dwarka', coordinates: [69.15, 22.32], type: 'fishing_harbor' },
-    { name: 'Positra', coordinates: [70.75, 22.55], type: 'coastal_town' },
-    { name: 'Surajkaradi', coordinates: [70.05, 21.05], type: 'fishing_harbor' },
+    { name: 'Varvala', coordinates: [160, 310], type: 'coastal_town' },
+    { name: 'Shivrajpur', coordinates: [220, 120], type: 'coastal_town' },
+    { name: 'Dwarka', coordinates: [200, 180], type: 'coastal_town' },
+    { name: 'Okha', coordinates: [240, 80], type: 'cityport' },
+    { name: 'Beyt Dwarka', coordinates: [260, 100], type: 'fishing_harbor' },
+    { name: 'Positra', coordinates: [450, 70], type: 'coastal_town' },
+    { name: 'Surajkaradi', coordinates: [300, 250], type: 'fishing_harbor' },
   ];
 
   const getThreatColor = (level: string) => {
@@ -56,13 +56,8 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
     }
   };
 
-  // Convert real coordinates to SVG positions
-  const coordToSVG = (coords: [number, number]): [number, number] => {
-    const [lon, lat] = coords;
-    const x = ((lon - 68.5) / (72.5 - 68.5)) * 600;
-    const y = ((23.5 - lat) / (23.5 - 20.0)) * 400;
-    return [Math.max(50, Math.min(550, x)), Math.max(50, Math.min(350, y))];
-  };
+  // Already pixel mapped → no projection
+  const coordToSVG = (coords: [number, number]): [number, number] => coords;
 
   const handleLocationClick = (location: typeof gujaratLocations[0]) => {
     const locationData = {
@@ -107,8 +102,8 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
       {gujaratLocations.map((location) => {
         const [x, y] = coordToSVG(location.coordinates as [number, number]);
         const locationThreat = threats.find(t =>
-          Math.abs(t.coordinates[0] - location.coordinates[0]) < 0.5 &&
-          Math.abs(t.coordinates[1] - location.coordinates[1]) < 0.5
+          Math.abs(t.coordinates[0] - location.coordinates[0]) < 15 &&
+          Math.abs(t.coordinates[1] - location.coordinates[1]) < 15
         );
 
         return (
@@ -162,8 +157,8 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
       {/* Threat Markers */}
       {threats.filter(threat =>
         !gujaratLocations.some(loc =>
-          Math.abs(threat.coordinates[0] - loc.coordinates[0]) < 0.5 &&
-          Math.abs(threat.coordinates[1] - loc.coordinates[1]) < 0.5
+          Math.abs(threat.coordinates[0] - loc.coordinates[0]) < 15 &&
+          Math.abs(threat.coordinates[1] - loc.coordinates[1]) < 15
         )
       ).map((threat) => {
         const [x, y] = coordToSVG(threat.coordinates);
