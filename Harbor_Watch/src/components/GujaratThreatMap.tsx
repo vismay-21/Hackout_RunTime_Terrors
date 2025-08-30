@@ -1,299 +1,114 @@
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { AlertTriangle, MapPin, Waves, Eye, Zap, Wind } from 'lucide-react';
 
 interface ThreatData {
   id: string;
   location: string;
   level: 'safe' | 'watch' | 'warning' | 'critical';
-  type: string;
-  timestamp: Date;
-  severity: number;
-  coordinates: [number, number];
+  type: 'erosion' | 'flood' | 'cyclone' | 'tsunami' | 'storm';
+  coordinates: { x: number; y: number };
 }
 
-interface GujaratThreatMapProps {
-  threats: ThreatData[];
-  onLocationClick: (location: { name: string; coordinates: [number, number]; data: any }) => void;
-}
+const threatLevels = {
+  safe: 'bg-green-500',
+  watch: 'bg-yellow-500',
+  warning: 'bg-orange-500',
+  critical: 'bg-red-600',
+};
 
-const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) => {
-  const [selectedThreat, setSelectedThreat] = useState<string | null>(null);
+const threatIcons = {
+  erosion: Waves,
+  flood: AlertTriangle,
+  cyclone: Wind,
+  tsunami: Zap,
+  storm: Eye,
+};
 
-  // Gujarat coastal locations with their coordinates
-  const gujaratLocations = [
-    { name: 'Varvala', coordinates: [69.2, 21.5], type: 'coastal_town' },
-    { name: 'Shivrajpur', coordinates: [69.6, 21.7], type: 'coastal_town' },
-    { name: 'Dwarka', coordinates: [69.0, 21.2], type: 'coastal_town' },
-    { name: 'Okha', coordinates: [69.1, 22.4], type: 'cityport' },
-    { name: 'Beyt Dwarka', coordinates: [69.2, 22.3], type: 'fishing_harbor' },
-    { name: 'Positra', coordinates: [70.8, 21.6], type: 'coastal_town' },
-    { name: 'Surajkaradi', coordinates: [70.1, 21.1], type: 'fishing_harbor' },
-  ];
-
-  const getThreatColor = (level: string) => {
-    switch (level) {
-      case 'safe': return '#10b981';
-      case 'watch': return '#f59e0b';
-      case 'warning': return '#f97316';
-      case 'critical': return '#ef4444';
-      default: return '#6b7280';
-    }
-  };
-
-  const getThreatSize = (severity: number) => {
-    return Math.max(12, Math.min(32, severity * 3));
-  };
-
-  const getLocationTypeIcon = (type: string) => {
-    switch (type) {
-      case 'major_port': return <Waves className="h-3 w-3" />;
-      case 'port': return <MapPin className="h-3 w-3" />;
-      case 'fishing_harbor': return <Waves className="h-3 w-3" />;
-      default: return <MapPin className="h-3 w-3" />;
-    }
-  };
-
-  // Convert real coordinates to SVG positions
-  const coordToSVG = (coords: [number, number]): [number, number] => {
-    // Gujarat coast spans roughly from 68.5°E to 72.5°E and 20.0°N to 23.5°N
-    const [lon, lat] = coords;
-    const x = ((lon - 68.5) / (72.5 - 68.5)) * 600; // Map width 600px
-    const y = ((23.5 - lat) / (23.5 - 20.0)) * 400; // Map height 400px (inverted Y)
-    return [Math.max(50, Math.min(550, x)), Math.max(50, Math.min(350, y))];
-  };
-
-  const handleLocationClick = (location: typeof gujaratLocations[0]) => {
-    const locationData = {
-      name: location.name,
-      coordinates: location.coordinates as [number, number],
-      data: {
-        tidalHeight: (Math.random() * 3 + 1).toFixed(1),
-        windSpeed: (Math.random() * 50 + 20).toFixed(1),
-        waterTemp: (27 + Math.random() * 4).toFixed(1),
-        pressure: (1005 + Math.random() * 15).toFixed(1),
-        cycloneRisk: (Math.random() * 100).toFixed(0),
-        algaeBloom: (Math.random() * 5).toFixed(1)
-      }
-    };
-    onLocationClick(locationData);
-  };
+export default function GujaratThreatMap() {
+  const [threats] = useState<ThreatData[]>([
+    {
+      id: '1',
+      location: 'Dwarka',
+      level: 'warning',
+      type: 'erosion',
+      coordinates: { x: 20, y: 30 },
+    },
+    {
+      id: '2',
+      location: 'Somnath',
+      level: 'critical',
+      type: 'flood',
+      coordinates: { x: 40, y: 60 },
+    },
+    {
+      id: '3',
+      location: 'Surat',
+      level: 'watch',
+      type: 'cyclone',
+      coordinates: { x: 70, y: 40 },
+    },
+  ]);
 
   return (
-    <div className="relative w-full h-[500px] bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg overflow-hidden border">
-      {/* Map Background - Gujarat coastline */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: 'url(/map1.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundColor: 'blue',
-          backgroundAttachment: 'fixed', // 🔒 keeps the map static
-        }}
-      ></div>
+    <div className="min-h-screen bg-gray-100 p-6">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+        Gujarat Coastal Threat Map
+      </h1>
 
-      {/* Grid Overlay */}
-      <svg className="absolute inset-0 w-full h-full">
-        <defs>
-          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="black" strokeWidth="1.75" opacity="0.5" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#grid)" />
-      </svg>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Map Section inside Grid */}
+        <Card className="relative overflow-hidden rounded-2xl shadow-md">
+          <img
+            src="/gujarat-map.png"
+            alt="Gujarat Map"
+            className="w-full h-full object-contain"
+          />
 
-      {/* Gujarat Locations */}
-      {gujaratLocations.map((location) => {
-        const [x, y] = coordToSVG(location.coordinates as [number, number]);
-        const locationThreat = threats.find(t => 
-          Math.abs(t.coordinates[0] - location.coordinates[0]) < 0.5 &&
-          Math.abs(t.coordinates[1] - location.coordinates[1]) < 0.5
-        );
-
-        return (
-          <div
-            key={location.name}
-            className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-300 hover:scale-110"
-            style={{ left: x, top: y }}
-            onClick={() => handleLocationClick(location)}
-          >
-            <div className="relative">
-              {locationThreat && (
-                <div
-                  className="absolute inset-0 rounded-full animate-ping"
-                  style={{
-                    backgroundColor: getThreatColor(locationThreat.level),
-                    width: getThreatSize(locationThreat.severity),
-                    height: getThreatSize(locationThreat.severity),
-                    opacity: 0.4
-                  }}
-                />
-              )}
-
+          {threats.map((threat) => {
+            const Icon = threatIcons[threat.type];
+            return (
               <div
-                className={`relative rounded-full border-2 border-background flex items-center justify-center shadow-lg transition-all ${
-                  locationThreat ? 'bg-opacity-90' : 'bg-primary/80 hover:bg-primary'
-                }`}
+                key={threat.id}
+                className={`absolute transform -translate-x-1/2 -translate-y-1/2 p-2 rounded-full shadow-lg ${threatLevels[threat.level]}`}
                 style={{
-                  backgroundColor: locationThreat ? getThreatColor(locationThreat.level) : undefined,
-                  width: locationThreat ? getThreatSize(locationThreat.severity) : 20,
-                  height: locationThreat ? getThreatSize(locationThreat.severity) : 20
+                  left: `${threat.coordinates.x}%`,
+                  top: `${threat.coordinates.y}%`,
                 }}
               >
-                {locationThreat ? (
-                  <AlertTriangle 
-                    className="text-white" 
-                    size={Math.max(8, (locationThreat ? getThreatSize(locationThreat.severity) : 20) * 0.5)} 
-                  />
-                ) : (
-                  getLocationTypeIcon(location.type)
-                )}
+                <Icon className="w-5 h-5 text-white" />
               </div>
+            );
+          })}
+        </Card>
 
-              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 bg-card/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-medium border shadow-sm whitespace-nowrap">
-                {location.name}
-              </div>
-            </div>
-          </div>
-        );
-      })}
-
-      {/* Threat Markers for additional threats */}
-      {threats.filter(threat => 
-        !gujaratLocations.some(loc => 
-          Math.abs(threat.coordinates[0] - loc.coordinates[0]) < 0.5 &&
-          Math.abs(threat.coordinates[1] - loc.coordinates[1]) < 0.5
-        )
-      ).map((threat) => {
-        const [x, y] = coordToSVG(threat.coordinates);
-        const isSelected = selectedThreat === threat.id;
-
-        return (
-          <div
-            key={threat.id}
-            className="absolute cursor-pointer transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 hover:scale-110"
-            style={{ left: x, top: y }}
-            onClick={() => setSelectedThreat(isSelected ? null : threat.id)}
-          >
-            {threat.level === 'critical' && (
-              <div
-                className="absolute inset-0 rounded-full animate-ping"
-                style={{
-                  backgroundColor: getThreatColor(threat.level),
-                  width: getThreatSize(threat.severity),
-                  height: getThreatSize(threat.severity),
-                  opacity: 0.3
-                }}
-              />
-            )}
-
-            <div
-              className="relative rounded-full border-2 border-background flex items-center justify-center shadow-lg"
-              style={{
-                backgroundColor: getThreatColor(threat.level),
-                width: getThreatSize(threat.severity),
-                height: getThreatSize(threat.severity)
-              }}
-            >
-              <AlertTriangle 
-                className="text-white" 
-                size={Math.max(12, getThreatSize(threat.severity) * 0.5)} 
-              />
-            </div>
-
-            {isSelected && (
-              <Card className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-56 z-10 shadow-xl">
-                <div className="p-3 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <h4 className="font-semibold text-sm">{threat.location}</h4>
-                    <Badge 
-                      variant="outline" 
-                      className={`text-xs ${
-                        threat.level === 'critical' ? 'border-critical text-critical' :
-                        threat.level === 'warning' ? 'border-warning text-warning' :
-                        threat.level === 'watch' ? 'border-watch text-watch' :
-                        'border-safe text-safe'
-                      }`}
-                    >
-                      {threat.level.toUpperCase()}
-                    </Badge>
+        {/* Threat Info Section */}
+        <div className="space-y-4">
+          {threats.map((threat) => {
+            const Icon = threatIcons[threat.type];
+            return (
+              <Card
+                key={threat.id}
+                className="p-4 flex items-center justify-between hover:shadow-lg transition"
+              >
+                <div className="flex items-center gap-3">
+                  <Icon className="w-6 h-6 text-gray-600" />
+                  <div>
+                    <h3 className="font-semibold text-lg">{threat.location}</h3>
+                    <p className="text-sm text-gray-600 capitalize">{threat.type}</p>
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    <div className="flex items-center space-x-1">
-                      <Waves className="h-3 w-3" />
-                      <span>{threat.type}</span>
-                    </div>
-                    <div className="flex items-center space-x-1 mt-1">
-                      <span>Severity: {threat.severity.toFixed(1)}/10</span>
-                    </div>
-                    <div className="mt-1">
-                      {threat.timestamp.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })} IST
-                    </div>
-                  </div>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleLocationClick({
-                        name: threat.location,
-                        coordinates: threat.coordinates as [number, number],
-                        type: 'threat_location'
-                      });
-                    }}
-                    className="w-full text-xs mt-2"
-                  >
-                    <Eye className="h-3 w-3 mr-1" />
-                    View Details
-                  </Button>
                 </div>
+                <Badge
+                  className={`${threatLevels[threat.level]} text-white px-3 py-1 rounded-full`}
+                >
+                  {threat.level}
+                </Badge>
               </Card>
-            )}
-          </div>
-        );
-      })}
-
-      {/* Legend */}
-      <div className="absolute top-4 left-4 bg-card/90 backdrop-blur-sm rounded-md p-1 border shadow-md">
-        <h4 className="text-[10px] font-semibold mb-1">Alert Levels</h4>
-        <div className="space-y-0.5">
-          {[
-            { level: 'safe', label: 'Safe', icon: <MapPin className="h-2 w-2" /> },
-            { level: 'watch', label: 'Watch', icon: <Eye className="h-2 w-2" /> },
-            { level: 'warning', label: 'Warning', icon: <AlertTriangle className="h-2 w-2" /> },
-            { level: 'critical', label: 'Critical', icon: <Zap className="h-2 w-2" /> }
-          ].map(({ level, label, icon }) => (
-            <div key={level} className="flex items-center space-x-1 text-[10px]">
-              <div
-                className="w-2 h-2 rounded-full border border-background flex items-center justify-center"
-                style={{ backgroundColor: getThreatColor(level) }}
-              >
-                <div className="text-white" style={{ fontSize: '6px' }}>
-                  {icon}
-                </div>
-              </div>
-              <span>{label}</span>
-            </div>
-          ))}
-        </div>
-        <div className="text-[9px] text-muted-foreground mt-0.5 pt-0.5 border-t">
-          Click locations for detailed metrics
-        </div>
-      </div>
-
-      {/* Scale */}
-      <div className="absolute bottom-4 right-4 bg-card/90 backdrop-blur-sm rounded-lg p-2 border shadow-lg">
-        <div className="text-xs text-muted-foreground mb-1">Scale</div>
-        <div className="flex items-center space-x-1">
-          <div className="w-8 h-0.5 bg-black"></div>
-          <span className="text-xs">35 km</span>
+            );
+          })}
         </div>
       </div>
     </div>
   );
-};
-
-export default GujaratThreatMap;
+}
