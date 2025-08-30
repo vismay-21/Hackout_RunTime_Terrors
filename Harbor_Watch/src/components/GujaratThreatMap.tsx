@@ -107,7 +107,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
   <rect width="100%" height="100%" fill="url(#grid)" />
 
   {/* Gujarat Coastline */}
-  <path
+  {/* <path
     d="M 80 200 Q 120 180 180 190 Q 240 185 300 195 Q 360 200 420 185 Q 480 175 540 180"
     stroke="hsl(var(--primary))"
     strokeWidth="4"
@@ -120,7 +120,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
     strokeWidth="2"
     fill="none"
     className="opacity-50"
-  />
+  /> */}
 
   {/* Arabian Sea label */}
   <text x="300" y="120" textAnchor="middle" className="fill-primary text-sm font-medium opacity-60">
@@ -295,18 +295,18 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
       })}
 
       {/* Legend */}
-      <div className="absolute bottom-4 left-4 bg-card/90 backdrop-blur-sm rounded-lg p-3 border shadow-lg">
-        <h4 className="text-sm font-semibold mb-2">Alert Levels</h4>
+      <div className="absolute top-4 left-4 bg-card/90 backdrop-blur-sm rounded-lg p-2 border shadow-lg">
+        <h4 className="text-xs font-semibold mb-1">Alert Levels</h4>
         <div className="space-y-1">
           {[
-            { level: 'safe', label: 'Safe', icon: <MapPin className="h-3 w-3" /> },
-            { level: 'watch', label: 'Watch', icon: <Eye className="h-3 w-3" /> },
-            { level: 'warning', label: 'Warning', icon: <AlertTriangle className="h-3 w-3" /> },
-            { level: 'critical', label: 'Critical', icon: <Zap className="h-3 w-3" /> }
+            { level: 'safe', label: 'Safe', icon: <MapPin className="h-2 w-2" /> },
+            { level: 'watch', label: 'Watch', icon: <Eye className="h-2 w-2" /> },
+            { level: 'warning', label: 'Warning', icon: <AlertTriangle className="h-2 w-2" /> },
+            { level: 'critical', label: 'Critical', icon: <Zap className="h-2 w-2" /> }
           ].map(({ level, label, icon }) => (
             <div key={level} className="flex items-center space-x-2 text-xs">
               <div
-                className="w-3 h-3 rounded-full border border-background flex items-center justify-center"
+                className="w-2.5 h-2.5 rounded-full border border-background flex items-center justify-center"
                 style={{ backgroundColor: getThreatColor(level) }}
               >
                 <div className="text-white" style={{ fontSize: '8px' }}>
@@ -317,7 +317,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
             </div>
           ))}
         </div>
-        <div className="text-xs text-muted-foreground mt-2 pt-2 border-t">
+        <div className="text-xs text-muted-foreground mt-1 pt-1 border-t">
           Click locations for detailed metrics
         </div>
       </div>
