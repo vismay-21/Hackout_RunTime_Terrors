@@ -40,7 +40,7 @@ const ThreatMap = ({ threats }: ThreatMapProps) => {
       <div className="absolute inset-0">
         {/* Background Image */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 opacity-100"
           style={{
             backgroundImage: `url("/map.png")`, // Replace with the actual path to your image
             backgroundSize: 'cover',
