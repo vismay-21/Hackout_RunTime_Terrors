@@ -28,9 +28,9 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
     { name: 'Shivrajpur', coordinates: [85, 335], type: 'coastal_town' },
     { name: 'Dwarka', coordinates: [125, 455], type: 'coastal_town' },
     { name: 'Okha', coordinates: [220, 55], type: 'cityport' },
-    { name: 'Beyt Dwarka', coordinates: [310, 37], type: 'fishing_harbor' },
+    { name: 'Beyt Dwarka', coordinates: [330, 37], type: 'fishing_harbor' },
     { name: 'Positra', coordinates: [440, 115], type: 'coastal_town' },
-    { name: 'Surajkaradi', coordinates: [440, 150], type: 'fishing_harbor' },
+    { name: 'Surajkaradi', coordinates: [160, 150], type: 'fishing_harbor' },
   ];
 
   const getThreatColor = (level: string) => {
