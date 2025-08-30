@@ -58,32 +58,32 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
     }
   };
 
-  // Convert real coordinates to SVG positions
-  const coordToSVG = (coords: [number, number]): [number, number] => {
-    // Gujarat coast spans roughly from 68.5°E to 72.5°E and 20.0°N to 23.5°N
-    const [lon, lat] = coords;
-    const x = ((lon - 68.5) / (72.5 - 68.5)) * 600; // Map width 600px
-    const y = ((23.5 - lat) / (23.5 - 20.0)) * 400; // Map height 400px (inverted Y)
-    return [Math.max(50, Math.min(550, x)), Math.max(50, Math.min(350, y))];
-  };
+  // // Convert real coordinates to SVG positions
+  // const coordToSVG = (coords: [number, number]): [number, number] => {
+  //   // Gujarat coast spans roughly from 68.5°E to 72.5°E and 20.0°N to 23.5°N
+  //   const [lon, lat] = coords;
+  //   const x = ((lon - 68.5) / (72.5 - 68.5)) * 600; // Map width 600px
+  //   const y = ((23.5 - lat) / (23.5 - 20.0)) * 400; // Map height 400px (inverted Y)
+  //   return [Math.max(50, Math.min(550, x)), Math.max(50, Math.min(350, y))];
+  // };
 
-  const handleLocationClick = (location: typeof gujaratLocations[0]) => {
-    // Generate sample data for the location
-    const locationData = {
-      name: location.name,
-      coordinates: location.coordinates as [number, number],
-      data: {
-        tidalHeight: (Math.random() * 3 + 1).toFixed(1),
-        windSpeed: (Math.random() * 50 + 20).toFixed(1),
-        waterTemp: (27 + Math.random() * 4).toFixed(1),
-        pressure: (1005 + Math.random() * 15).toFixed(1),
-        cycloneRisk: (Math.random() * 100).toFixed(0),
-        algaeBloom: (Math.random() * 5).toFixed(1)
-      }
-    };
+  // const handleLocationClick = (location: typeof gujaratLocations[0]) => {
+  //   // Generate sample data for the location
+  //   const locationData = {
+  //     name: location.name,
+  //     coordinates: location.coordinates as [number, number],
+  //     data: {
+  //       tidalHeight: (Math.random() * 3 + 1).toFixed(1),
+  //       windSpeed: (Math.random() * 50 + 20).toFixed(1),
+  //       waterTemp: (27 + Math.random() * 4).toFixed(1),
+  //       pressure: (1005 + Math.random() * 15).toFixed(1),
+  //       cycloneRisk: (Math.random() * 100).toFixed(0),
+  //       algaeBloom: (Math.random() * 5).toFixed(1)
+  //     }
+  //   };
     
-    onLocationClick(locationData);
-  };
+  //   onLocationClick(locationData);
+  // };
 
   return (
     <div className="relative w-full h-[500px] bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg overflow-hidden border">
@@ -144,12 +144,12 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
       </div> */}
 
       {/* Gujarat Locations */}
-      {/* {gujaratLocations.map((location) => {
+      {gujaratLocations.map((location) => {
         const [x, y] = coordToSVG(location.coordinates as [number, number]);
         const locationThreat = threats.find(t => 
           Math.abs(t.coordinates[0] - location.coordinates[0]) < 0.5 &&
           Math.abs(t.coordinates[1] - location.coordinates[1]) < 0.5
-        ); */}
+        );
         
         return (
           <div
