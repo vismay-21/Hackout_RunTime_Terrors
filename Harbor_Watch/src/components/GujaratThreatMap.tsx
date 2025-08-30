@@ -87,7 +87,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
   return (
     <div className="relative w-full h-[500px] bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg overflow-hidden border">
       {/* Map Background - Gujarat coastline */}
-<div
+{/* <div
   className="absolute inset-0"
   style={{
     backgroundImage: 'url(/map.png)', // Path to the image in the public folder
@@ -95,7 +95,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
     backgroundPosition: 'center',
     backgroundColor: 'blue', // Fallback color in case the image doesn't load
   }}
-></div>
+></div> */}
 
 {/* Grid Overlay */}
 <svg className="absolute inset-0 w-full h-full">
