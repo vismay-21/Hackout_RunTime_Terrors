@@ -365,16 +365,27 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
   const [selectedThreat, setSelectedThreat] = useState<string | null>(null);
 
   // Gujarat coastal locations with their coordinates
+  // const gujaratLocations = [
+  //   { name: 'Varvala', coordinates: [69.2, 21.5], type: 'coastal_town' },
+  //   { name: 'Shivrajpur', coordinates: [69.6, 21.7], type: 'coastal_town' },
+  //   { name: 'Dwarka', coordinates: [69.0, 21.2], type: 'coastal_town' },
+  //   { name: 'Okha', coordinates: [69.1, 22.4], type: 'cityport' },
+  //   { name: 'Beyt Dwarka', coordinates: [69.2, 22.3], type: 'fishing_harbor' },
+  //   { name: 'Positra', coordinates: [70.8, 21.6], type: 'coastal_town' },
+  //   { name: 'Surajkaradi', coordinates: [70.1, 21.1], type: 'fishing_harbor' },
+  //   //{ name: 'Chorwad', coordinates: [70.2167, 21.0333], type: 'fishing_harbor' }
+  // ];
+
   const gujaratLocations = [
-    { name: 'Varvala', coordinates: [69.2, 21.5], type: 'coastal_town' },
-    { name: 'Shivrajpur', coordinates: [69.6, 21.7], type: 'coastal_town' },
-    { name: 'Dwarka', coordinates: [69.0, 21.2], type: 'coastal_town' },
-    { name: 'Okha', coordinates: [69.1, 22.4], type: 'cityport' },
-    { name: 'Beyt Dwarka', coordinates: [69.2, 22.3], type: 'fishing_harbor' },
-    { name: 'Positra', coordinates: [70.8, 21.6], type: 'coastal_town' },
-    { name: 'Surajkaradi', coordinates: [70.1, 21.1], type: 'fishing_harbor' },
-    //{ name: 'Chorwad', coordinates: [70.2167, 21.0333], type: 'fishing_harbor' }
-  ];
+  { name: 'Varvala',      coordinates: [69.2, 17.5], type: 'coastal_town' },     
+  { name: 'Shivrajpur',   coordinates: [69.0, 20.0], type: 'coastal_town' },     
+  { name: 'Dwarka',       coordinates: [69.4, 19.2], type: 'coastal_town' },     
+  { name: 'Okha',         coordinates: [69.5, 22.8], type: 'cityport' },         
+  { name: 'Beyt Dwarka',  coordinates: [70.8, 22.7], type: 'fishing_harbor' },   
+  { name: 'Positra',      coordinates: [71.2, 22.4], type: 'coastal_town' },     
+  { name: 'Surajkaradi',  coordinates: [70.2, 21.0], type: 'fishing_harbor' },   
+];
+
 
   const getThreatColor = (level: string) => {
     switch (level) {
