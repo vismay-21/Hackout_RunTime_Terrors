@@ -90,7 +90,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
 <div
   className="absolute inset-0"
   style={{
-    backgroundImage: 'url(/map.png)', // Path to the image in the public folder
+    backgroundImage: 'url(/map1.png)', // Path to the image in the public folder
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundColor: 'blue', // Fallback color in case the image doesn't load
