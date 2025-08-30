@@ -31,7 +31,6 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
     { name: 'Beyt Dwarka', coordinates: [69.2, 22.3], type: 'fishing_harbor' },
     { name: 'Positra', coordinates: [70.8, 21.6], type: 'coastal_town' },
     { name: 'Surajkaradi', coordinates: [70.1, 21.1], type: 'fishing_harbor' },
-    //{ name: 'Chorwad', coordinates: [70.2167, 21.0333], type: 'fishing_harbor' }
   ];
 
   const getThreatColor = (level: string) => {
@@ -67,7 +66,6 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
   };
 
   const handleLocationClick = (location: typeof gujaratLocations[0]) => {
-    // Generate sample data for the location
     const locationData = {
       name: location.name,
       coordinates: location.coordinates as [number, number],
@@ -80,67 +78,32 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
         algaeBloom: (Math.random() * 5).toFixed(1)
       }
     };
-    
     onLocationClick(locationData);
   };
 
   return (
     <div className="relative w-full h-[500px] bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg overflow-hidden border">
       {/* Map Background - Gujarat coastline */}
-<div
-  className="absolute inset-0"
-  style={{
-    backgroundImage: 'url(/map1.png)', // Path to the image in the public folder
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundColor: 'blue', // Fallback color in case the image doesn't load
-  }}
-></div>
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: 'url(/map1.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundColor: 'blue',
+          backgroundAttachment: 'fixed', // 🔒 keeps the map static
+        }}
+      ></div>
 
-{/* Grid Overlay */}
-<svg className="absolute inset-0 w-full h-full">
-  <defs>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="black" strokeWidth="1.75" opacity="0.5" />
-    </pattern>
-  </defs>
-  <rect width="100%" height="100%" fill="url(#grid)" />
-
-</svg>
-  {/* Gujarat Coastline */}
-  {/* <path
-    d="M 80 200 Q 120 180 180 190 Q 240 185 300 195 Q 360 200 420 185 Q 480 175 540 180"
-    stroke="hsl(var(--primary))"
-    strokeWidth="4"
-    fill="none"
-    className="opacity-70"
-  />
-  <path
-    d="M 80 220 Q 120 200 180 210 Q 240 205 300 215 Q 360 220 420 205 Q 480 195 540 200"
-    stroke="hsl(var(--primary))"
-    strokeWidth="2"
-    fill="none"
-    className="opacity-50"
-  /> */}
-
-  {/* Arabian Sea label */}
-  {/* <text x="300" y="120" textAnchor="middle" className="fill-primary text-sm font-medium opacity-60">
-    Arabian Sea
-  </text> */}
-
-  {/* State boundary indication */}
-  {/* <text x="450" y="300" textAnchor="middle" className="fill-primary text-xs opacity-40">
-    Gujarat State
-  </text> */}
-
-
-      {/* Location Labels */}
-      {/* <div className="absolute top-4 left-4 text-sm font-medium text-primary">
-        Gujarat Coastal Alert System
-      </div> */}
-      {/* <div className="absolute top-4 right-4 bg-card/90 backdrop-blur-sm rounded-md px-2 py-1 border shadow-md text-xs font-medium text-black">
-        Real-time Monitoring Network
-      </div> */}
+      {/* Grid Overlay */}
+      <svg className="absolute inset-0 w-full h-full">
+        <defs>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="black" strokeWidth="1.75" opacity="0.5" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
 
       {/* Gujarat Locations */}
       {gujaratLocations.map((location) => {
@@ -149,7 +112,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
           Math.abs(t.coordinates[0] - location.coordinates[0]) < 0.5 &&
           Math.abs(t.coordinates[1] - location.coordinates[1]) < 0.5
         );
-        
+
         return (
           <div
             key={location.name}
@@ -157,7 +120,6 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
             style={{ left: x, top: y }}
             onClick={() => handleLocationClick(location)}
           >
-            {/* Location Marker */}
             <div className="relative">
               {locationThreat && (
                 <div
@@ -170,7 +132,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
                   }}
                 />
               )}
-              
+
               <div
                 className={`relative rounded-full border-2 border-background flex items-center justify-center shadow-lg transition-all ${
                   locationThreat ? 'bg-opacity-90' : 'bg-primary/80 hover:bg-primary'
@@ -190,8 +152,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
                   getLocationTypeIcon(location.type)
                 )}
               </div>
-              
-              {/* Location Label */}
+
               <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 bg-card/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-medium border shadow-sm whitespace-nowrap">
                 {location.name}
               </div>
@@ -200,7 +161,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
         );
       })}
 
-      {/* Threat Markers for additional threats not tied to specific locations */}
+      {/* Threat Markers for additional threats */}
       {threats.filter(threat => 
         !gujaratLocations.some(loc => 
           Math.abs(threat.coordinates[0] - loc.coordinates[0]) < 0.5 &&
@@ -228,7 +189,7 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
                 }}
               />
             )}
-            
+
             <div
               className="relative rounded-full border-2 border-background flex items-center justify-center shadow-lg"
               style={{
