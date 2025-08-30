@@ -6,11 +6,8 @@ import {
   AlertTriangle, 
   MapPin, 
   Activity, 
-  Users, 
   Bell,
   Waves,
-  Wind,
-  Thermometer,
   Eye
 } from 'lucide-react';
 import GujaratThreatMap from './GujaratThreatMap';
@@ -19,6 +16,9 @@ import EnhancedDataMetrics from './EnhancedDataMetrics';
 import VirtualDecisionAssistant from './VirtualDecisionAssistant';
 import GraphsPanel from './GraphsPanel';
 import OperationalLogger from './OperationalLogger';
+
+// 👇 Import your chatbot
+import Chatbot from './Chatbot';
 
 export type ThreatLevel = 'safe' | 'watch' | 'warning' | 'critical';
 
@@ -37,7 +37,7 @@ const Dashboard = () => {
   const [activeThreats, setActiveThreats] = useState<ThreatData[]>([
     {
       id: '1',
-      location: 'Veraval Port',
+      location: 'Okha Port',
       level: 'critical',
       type: 'Cyclone Alert',
       timestamp: new Date(),
@@ -46,7 +46,7 @@ const Dashboard = () => {
     },
     {
       id: '2',
-      location: 'Porbandar Coast',
+      location: 'Dwarka Shore',
       level: 'warning',
       type: 'High Tidal Surge',
       timestamp: new Date(),
@@ -55,7 +55,7 @@ const Dashboard = () => {
     },
     {
       id: '3',
-      location: 'Dwarka Shore',
+      location: 'Beyt Dwarka',
       level: 'watch',
       type: 'Strong Winds',
       timestamp: new Date(),
@@ -101,6 +101,14 @@ const Dashboard = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // 👇 Build AI context from dashboard state
+  const aiContext = `
+    Current overall threat level: ${currentThreatLevel}.
+    Active threats: ${activeThreats.length}.
+    Critical alerts: ${activeThreats.filter(t => t.level === 'critical').length}.
+    Threat details: ${activeThreats.map(t => `${t.location} - ${t.type} (severity ${t.severity.toFixed(1)})`).join('; ')}
+  `;
+
   return (
     <div className="min-h-screen bg-background text-foreground p-6">
       {/* Header */}
@@ -119,10 +127,7 @@ const Dashboard = () => {
         </div>
         
         <div className="flex items-center space-x-4">
-          <Button variant="outline" size="sm">
-            <Bell className="h-4 w-4 mr-2" />
-            Notifications
-          </Button>
+          
           <div className="text-sm text-muted-foreground">
             Last Update: {new Date().toLocaleTimeString()}
           </div>
@@ -177,31 +182,35 @@ const Dashboard = () => {
             onMetricClick={setSelectedLocation} 
             onGraphsView={() => setShowGraphs(true)} 
           />
-
-          {/* Virtual Decision Assistant */}
-          <VirtualDecisionAssistant 
-            currentLevel={currentThreatLevel} 
-            threats={activeThreats}
-            onActionExecute={(actionId) => setExecutedActions(prev => [...prev, actionId])}
-          />
         </div>
 
         {/* Center Column - Map */}
-        <div className="lg:col-span-1">
-          <Card className="h-[50vh]">
-            <CardHeader>
+        <div className="lg:col-span-1 space-y-6">
+          <Card className="h-[75vh] min-h-[420px] overflow-hidden isolate flex flex-col">
+            <CardHeader className="shrink-0">
               <CardTitle className="flex items-center space-x-2">
                 <MapPin className="h-5 w-5 text-primary" />
                 <span>Threat Map</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-0">
-              <GujaratThreatMap 
-                threats={activeThreats} 
-                onLocationClick={setSelectedLocation}
-              />
+            <CardContent className="p-0 relative flex-1">
+              <div className="absolute inset-0">
+                <GujaratThreatMap 
+                  threats={activeThreats} 
+                  onLocationClick={setSelectedLocation}
+                />
+              </div>
             </CardContent>
           </Card>
+
+          {/* Assistant below map */}
+          <div className="relative z-10">
+            <VirtualDecisionAssistant 
+              currentLevel={currentThreatLevel} 
+              threats={activeThreats}
+              onActionExecute={(actionId) => setExecutedActions(prev => [...prev, actionId])}
+            />
+          </div>
         </div>
 
         {/* Right Column - Active Alerts & Logs */}
@@ -224,6 +233,9 @@ const Dashboard = () => {
           </div>
         </div>
       )}
+
+      {/* 👇 Chatbot always floating bottom-right */}
+      <Chatbot context={aiContext} />
     </div>
   );
 };
