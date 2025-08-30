@@ -45,6 +45,7 @@ const ThreatMap = ({ threats }: ThreatMapProps) => {
             backgroundImage: "url('https://hackout-run-time-terrors-tzpw.vercel.app/map.png')", // Replace with the actual path to your image
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
             backgroundColor: 'blue', // Fallback color in case the image doesn't load
           }}
         />
