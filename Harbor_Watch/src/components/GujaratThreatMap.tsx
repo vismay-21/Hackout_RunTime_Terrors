@@ -202,14 +202,14 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
       })}
 
       {/* Threat Markers for additional threats not tied to specific locations */}
-      {threats.filter(threat => 
+      {/* {threats.filter(threat => 
         !gujaratLocations.some(loc => 
           Math.abs(threat.coordinates[0] - loc.coordinates[0]) < 0.5 &&
           Math.abs(threat.coordinates[1] - loc.coordinates[1]) < 0.5
         )
       ).map((threat) => {
         const [x, y] = coordToSVG(threat.coordinates);
-        const isSelected = selectedThreat === threat.id;
+        const isSelected = selectedThreat === threat.id; */}
 
         return (
           <div
