@@ -138,9 +138,9 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
       {/* <div className="absolute top-4 left-4 text-sm font-medium text-primary">
         Gujarat Coastal Alert System
       </div> */}
-      <div className="absolute top-4 right-4 bg-card/90 backdrop-blur-sm rounded-md px-2 py-1 border shadow-md text-xs font-medium text-black">
+      {/* <div className="absolute top-4 right-4 bg-card/90 backdrop-blur-sm rounded-md px-2 py-1 border shadow-md text-xs font-medium text-black">
         Real-time Monitoring Network
-      </div>
+      </div> */}
 
       {/* Gujarat Locations */}
       {gujaratLocations.map((location) => {
