@@ -42,7 +42,7 @@ const ThreatMap = ({ threats }: ThreatMapProps) => {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: "url('https://hackout-run-time-terrors-tzpw.vercel.app/map.png')", // Replace with the actual path to your image
+            backgroundImage: `url("/map.png")`, // Replace with the actual path to your image
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
