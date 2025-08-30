@@ -87,40 +87,51 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
   return (
     <div className="relative w-full h-[500px] bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg overflow-hidden border">
       {/* Map Background - Gujarat coastline */}
-      <svg className="absolute inset-0 w-full h-full">
-        <defs>
-          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.5" opacity="0.3"/>
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#grid)" />
-        
-        {/* Gujarat Coastline */}
-        <path
-          d="M 80 200 Q 120 180 180 190 Q 240 185 300 195 Q 360 200 420 185 Q 480 175 540 180"
-          stroke="hsl(var(--primary))"
-          strokeWidth="4"
-          fill="none"
-          className="opacity-70"
-        />
-        <path
-          d="M 80 220 Q 120 200 180 210 Q 240 205 300 215 Q 360 220 420 205 Q 480 195 540 200"
-          stroke="hsl(var(--primary))"
-          strokeWidth="2"
-          fill="none"
-          className="opacity-50"
-        />
-        
-        {/* Arabian Sea label */}
-        <text x="300" y="120" textAnchor="middle" className="fill-primary text-sm font-medium opacity-60">
-          Arabian Sea
-        </text>
-        
-        {/* State boundary indication */}
-        <text x="450" y="300" textAnchor="middle" className="fill-primary text-xs opacity-40">
-          Gujarat State
-        </text>
-      </svg>
+<div
+  className="absolute inset-0"
+  style={{
+    backgroundImage: 'url(/map.png)', // Path to the image in the public folder
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundColor: 'blue', // Fallback color in case the image doesn't load
+  }}
+></div>
+
+{/* Grid Overlay */}
+<svg className="absolute inset-0 w-full h-full">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.5" opacity="0.3" />
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid)" />
+
+  {/* Gujarat Coastline */}
+  <path
+    d="M 80 200 Q 120 180 180 190 Q 240 185 300 195 Q 360 200 420 185 Q 480 175 540 180"
+    stroke="hsl(var(--primary))"
+    strokeWidth="4"
+    fill="none"
+    className="opacity-70"
+  />
+  <path
+    d="M 80 220 Q 120 200 180 210 Q 240 205 300 215 Q 360 220 420 205 Q 480 195 540 200"
+    stroke="hsl(var(--primary))"
+    strokeWidth="2"
+    fill="none"
+    className="opacity-50"
+  />
+
+  {/* Arabian Sea label */}
+  <text x="300" y="120" textAnchor="middle" className="fill-primary text-sm font-medium opacity-60">
+    Arabian Sea
+  </text>
+
+  {/* State boundary indication */}
+  <text x="450" y="300" textAnchor="middle" className="fill-primary text-xs opacity-40">
+    Gujarat State
+  </text>
+</svg>
 
       {/* Location Labels */}
       <div className="absolute top-4 left-4 text-sm font-medium text-primary">
