@@ -52,7 +52,7 @@ const ThreatMap = ({ threats }: ThreatMapProps) => {
 
 
         {/* Grid Overlay */}
-        <div className="absolute inset-0 opacity-20">
+        {/* <div className="absolute inset-0 opacity-20">
           <svg width="100%" height="100%" className="text-primary/30">
             <defs>
               <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -62,7 +62,7 @@ const ThreatMap = ({ threats }: ThreatMapProps) => {
             <rect width="100%" height="100%" fill="url(#grid)" />
           </svg>
         </div>
-      </div>
+      </div> */}
 
       {/* Coastline Representation */}
       <svg className="absolute inset-0 w-full h-full">
