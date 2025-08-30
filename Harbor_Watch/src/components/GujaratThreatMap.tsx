@@ -144,12 +144,12 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
       </div> */}
 
       {/* Gujarat Locations */}
-      {gujaratLocations.map((location) => {
+      {/* {gujaratLocations.map((location) => {
         const [x, y] = coordToSVG(location.coordinates as [number, number]);
         const locationThreat = threats.find(t => 
           Math.abs(t.coordinates[0] - location.coordinates[0]) < 0.5 &&
           Math.abs(t.coordinates[1] - location.coordinates[1]) < 0.5
-        );
+        ); */}
         
         return (
           <div
