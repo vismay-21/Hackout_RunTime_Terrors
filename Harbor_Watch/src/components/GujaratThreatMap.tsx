@@ -24,9 +24,9 @@ const GujaratThreatMap = ({ threats, onLocationClick }: GujaratThreatMapProps) =
 
   // Gujarat coastal locations with their coordinates
   const gujaratLocations = [
-    { name: 'Varvala', coordinates: [69.2, 23.0], type: 'coastal_town' },
+    { name: 'Varvala', coordinates: [69.2, 21.5], type: 'coastal_town' },
     { name: 'Shivrajpur', coordinates: [69.6, 21.7], type: 'coastal_town' },
-    { name: 'Dwarka', coordinates: [69.0, 22.2], type: 'coastal_town' },
+    { name: 'Dwarka', coordinates: [69.2, 23.2], type: 'coastal_town' },
     { name: 'Okha', coordinates: [69.1, 22.4], type: 'cityport' },
     { name: 'Beyt Dwarka', coordinates: [69.2, 22.3], type: 'fishing_harbor' },
     { name: 'Positra', coordinates: [70.8, 21.6], type: 'coastal_town' },
